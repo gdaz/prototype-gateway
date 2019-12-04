@@ -1,0 +1,27 @@
+server:
+  port: 8765
+
+spring:
+  application:
+    name: '@project.name@'
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: PROTOTYPE-JOB
+        uri: http://localhost:8767/
+#        uri: lb://PROTOTYPE-JOB
+        predicates:
+        - Path=/api/job/app/**
+        filters:
+        - RewritePath=/api/job/app/(?<segment>.*),/$\{segment}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    healthcheck:
+      enabled: true
+    fetch-registry: true
