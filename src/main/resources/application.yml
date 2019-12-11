@@ -14,9 +14,9 @@ spring:
         uri: http://localhost:8767/
 #        uri: lb://PROTOTYPE-JOB
         predicates:
-        - Path=/api/job/app/**
+        - Path=/api/job/**
         filters:
-        - RewritePath=/api/job/app/(?<segment>.*),/$\{segment}
+        - RewritePath=/api/job/(?<segment>.*),/$\{segment}
 
 eureka:
   client:
